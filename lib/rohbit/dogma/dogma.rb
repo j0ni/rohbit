@@ -12,7 +12,7 @@ module Rohbit
 
     def dogma_line
       @lines ||= File.open(File.dirname(__FILE__) + '/dogma.txt') { |f| f.readlines }
-      @lines[rand lines.count]
+      @lines[rand @lines.count]
     end
   end
 end
