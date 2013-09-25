@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+$:.unshift(File.dirname(__FILE__) + '/../lib/')
+
+require 'rohbit'
+require 'trollop'
+require 'yaml'
+
+default_config_file = File.expand_path(ENV['HOME'] + '/.rohbitrc')
+
+opts = Trollop::options do
+  banner "Usage: #{__FILE__} [options]"
+  opt :config_file, "YAML configuration file", type: String, default: default_config_file
+end
+
+Trollop::die "#{opts[:config_file]} must exist" unless File.exist?(opts[:config_file])
+
+config = File.open(opts[:config_file]) { |f| YAML.load(f) }
+bot = Rohbit::Bot.create(config)
+
+bot.start
