@@ -3,6 +3,7 @@ require 'cinch/plugins/identify'
 
 require 'rohbit/version'
 require 'rohbit/dogma/dogma'
+require 'rohbit/spook/spook'
 
 module Rohbit
   class Bot < Cinch::Bot
@@ -15,7 +16,8 @@ module Rohbit
           c.channels = conf['channels']
           c.plugins.plugins = [
             Cinch::Plugins::Identify,
-            Dogma
+            Dogma,
+            Spook
           ]
           if conf['password']
             c.delay_joins = :identified
